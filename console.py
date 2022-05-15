@@ -128,8 +128,8 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
         for p in range(1, len(args)):
             key = args[p].split('=')
-            change = {'"': '\"', '_': ' ', ',': '.'}
-            key[1] = key[1].replace(str(change.keys()), str(change.values()))
+            key[1] = key[1].replace('"', '\"')
+            key[1] = key[1].replace('_', ' ')
             param = '{} {} {} {}'.format(
                 args[0], new_instance.id, key[0], key[1])
             self.do_update(param)
