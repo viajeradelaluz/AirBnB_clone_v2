@@ -126,13 +126,16 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
         print(new_instance.id)
         storage.save()
+        param = {}
         for p in range(1, len(args)):
             key = args[p].split('=')
-            key[1] = key[1].replace('"', '\"')
+            if key[1][0] == '\"':
+                key[1] = key[1].replace('\"', '')
             key[1] = key[1].replace('_', ' ')
-            param = '{} {} {} {}'.format(
-                args[0], new_instance.id, key[0], key[1])
-            self.do_update(param)
+            param[key[0]] = key[1]
+        update = '{} {} {}'.format(
+            args[0], new_instance.id, param)
+        self.do_update(update)
 
     def help_create(self):
         """ Help information for the create method """
