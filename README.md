@@ -1,4 +1,4 @@
-<h1 align="center"><img src='https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg' width='250'><br>Clone - MySQL</h1>
+<h1 align="center"><img src='https://i.ibb.co/TtYYJRm/hbnb-original-colors.png' width='250'><br>Airbnb clone - MySQL</h1>
 
 <p align="center"><img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue"><img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white"><img src="https://img.shields.io/badge/json-5E5C5C?style=for-the-badge&logo=json&logoColor=white"><img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white"></p>
 
