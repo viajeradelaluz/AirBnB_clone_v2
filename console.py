@@ -2,8 +2,8 @@
 """ Console Module """
 import cmd
 import sys
-from models.base_model import BaseModel
 from models.__init__ import storage
+from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -122,20 +122,15 @@ class HBNBCommand(cmd.Cmd):
         if args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args[0]]()
-        storage.save()
-        print(new_instance.id)
-        storage.save()
         param = {}
         for p in range(1, len(args)):
             key = args[p].split('=')
-            if key[1][0] == '\"':
-                key[1] = key[1].replace('\"', '')
+            key[1] = key[1].replace('"', '')
             key[1] = key[1].replace('_', ' ')
             param[key[0]] = key[1]
-        update = '{} {} {}'.format(
-            args[0], new_instance.id, param)
-        self.do_update(update)
+        new_instance = HBNBCommand.classes[args[0]](**param)
+        new_instance.save()
+        print(new_instance.id)
 
     def help_create(self):
         """ Help information for the create method """
@@ -217,11 +212,10 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
+            for _, v in storage.all(HBNBCommand.classes[args]).items():
+                print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for _, v in storage.all().items():
                 print_list.append(str(v))
 
         print(print_list)
