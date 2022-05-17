@@ -3,8 +3,8 @@
     """
 import inspect
 import os
+import pycodestyle
 import unittest
-
 from console import HBNBCommand
 from io import StringIO
 from unittest.mock import patch
@@ -13,14 +13,6 @@ from unittest.mock import patch
 class TestHBNBCommand(unittest.TestCase):
     """ Testing the HBNBCommand class of the program.
         """
-
-    @classmethod
-    def setUp(cls):
-        """ Method to prepare each single test.
-            """
-        cls.console_test = HBNBCommand()
-        if os.path.exists("file.json"):
-            os.rename("file.json", "original_file.json")
 
     def test_module_documentation(self):
         """ Test if HBNBCommand module is documented.
@@ -38,6 +30,14 @@ class TestHBNBCommand(unittest.TestCase):
         methods = inspect.getmembers(HBNBCommand)
         for method in methods:
             self.assertTrue(inspect.getdoc(method))
+
+    def test_pycodeStyle(self):
+        """Test that we conform to PEP-8.
+            """
+        style = pycodestyle.StyleGuide(quiet=True)
+        result = style.check_files(["console.py"])
+        self.assertEqual(
+            result.total_errors, 0, "Found code style errors (pycodestyle).")
 
     def test_prompt(self):
         """ Test the prompt
@@ -57,11 +57,3 @@ class TestHBNBCommand(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("fdfdf")
             self.assertEqual("*** Unknown syntax: fdfdf", f.getvalue().strip())
-
-    def tearDown(self):
-        """ Method to leave each test
-            """
-        if os.path.exists("file.json"):
-            os.remove("file.json")
-        if os.path.exists("original_file.json"):
-            os.rename("original_file.json", "file.json")
