@@ -2,7 +2,6 @@
 """ Module with Unittest for the HBNBCommand class.
     """
 import inspect
-import os
 import pycodestyle
 import unittest
 from console import HBNBCommand
