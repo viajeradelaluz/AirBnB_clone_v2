@@ -2,11 +2,9 @@
 # Script that sets up your web servers for the deployment of web_static.
 
 # Install Nginx if it not already installed
-if [ ! -x /usr/sbin/nginx ]; then
-    sudo apt update -y
-    sudo apt install --allow-downgrades nginx -y
-    sudo ufw allow 'Nginx HTTP'
-fi
+sudo apt update -y
+sudo apt install --allow-downgrades nginx -y
+sudo ufw allow 'Nginx HTTP'
 
 # Create these folders if they don't already exist:
 #   /data/web_static/shared/            /data/web_static/releases/test/
