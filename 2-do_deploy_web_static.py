@@ -22,33 +22,29 @@ your web servers, using the function do_deploy:
 
 from fabric.api import run, put, env
 from os.path import exists
-from sys import argv
 
 env.hosts = ['52.201.246.143', '18.234.216.100']
-env.user = 'ubuntu'
 
 
 def do_deploy(archive_path):
-    """  """
+    """
+    Distributes an archive to your web servers
+    Returns False if the file at the path archive_path doesn't exist
+    """
+    if exists(archive_path) is False:
+        return False
     try:
-        if exists(archive_path) is False:
-            raise Exception
-
-        file = argv[3].split('/')[1]
-        unfile = file.split('.')[0]
-        releases = '/data/web_static/releases/'
-        current = '/data/web_static/current'
-
-        put('archive_path', '/tmp/')
-        run('mkdir -p {}{}'.format(releases, unfile))
-        run('tar -xzf /tmp/{} -C {}'.format(file, releases))
-        run('rm -rf /tmp/{}'.format(file))
-        run('mv {0}{1}/web_static/* {0}{1}/'.format(releases, unfile))
-        run('rm -rf {}{}/web_static'.format(releases, unfile))
-        run('rm -rf {}'.format(current))
-        run('ln -s {}{} {}'.format(releases, unfile, current))
-
+        filename = archive_path.split("/")[-1]
+        unfile = filename.split(".")[0]
+        path = "/data/web_static/releases/"
+        put(archive_path, "/tmp/")
+        run("mkdir -p {}{}".format(path, unfile))
+        run("tar -xzf /tmp/{} -C {}{}".format(filename, path, unfile))
+        run("rm -rf /tmp/{}".format(filename))
+        run('mv {0}{1}/web_static/* {0}{1}/'.format(path, unfile))
+        run('rm -rf {}{}/web_static'.format(path, unfile))
+        run('rm -rf /data/web_static/current')
+        run('ln -s {}{}/ /data/web_static/current'.format(path, unfile))
         return True
-
     except Exception:
         return False
