@@ -61,9 +61,11 @@ class DBStorage:
     def reload(self):
         """ Create the current session and all tables in the database """
         Base.metadata.create_all(self.__engine)
-        Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        self.__session = scoped_session(Session)
+        session_make = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session = scoped_session(session_make)
+        self.__session = Session()
 
     def close(self):
         """ Close the session """
-        self.__session.remove()
+        from sqlalchemy.orm import Session
+        Session.close(self.__session)
