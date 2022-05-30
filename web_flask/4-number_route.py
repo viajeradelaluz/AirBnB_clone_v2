@@ -21,16 +21,19 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def hello_HBNB():
+    """ Display hello HBNB """
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    """ Display HBNB """
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def c_something(text):
+    """ Display C """
     new_text = text.replace('_', ' ')
     return 'C {}'.format(new_text)
 
@@ -38,6 +41,7 @@ def c_something(text):
 @app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python(text='is cool'):
+    """ Display Python """
     if '_' in text:
         text = text.replace('_', ' ')
     return 'Python {}'.format(text)
@@ -45,6 +49,7 @@ def python(text='is cool'):
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def number(n):
+    """ Display if n is a number """
     return '{} is a number'.format(n)
 
 

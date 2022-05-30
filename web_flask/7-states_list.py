@@ -23,15 +23,17 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.teardown_appcontext
-def remove_session(self):
-    storage.close()
-
-
 @app.route('/states_list', strict_slashes=False)
 def states_list():
+    """ List all states on html """
     states = storage.all(State)
     return render_template('7-states_list.html', states=states)
+
+
+@app.teardown_appcontext
+def remove_session(exception):
+    """ Remove the current SQLAlchemy Session """
+    storage.close()
 
 
 if __name__ == '__main__':
