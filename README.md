@@ -6,16 +6,6 @@ The AirBnB clone project series starts with the goal to deploy on your server a 
 
 To see our own implementation of the backend interface for managing program data, please go to [Airbnb clone - The console](https://github.com/viajeradelaluz/AirBnB_clone).
 
----
-
-## Features
-
-## General Use
-
-## Examples
-
-## Files Description
-
 ## Authors
 
 | [<img src="https://avatars.githubusercontent.com/u/87556519" width="110" style="border-radius: 50%"><br><sub>Johanna Alfonso<br><sup>@viajeradelaluz](https://github.com/viajeradelaluz) | [<img src="https://avatars.githubusercontent.com/u/91074465" width="110" style="border-radius: 50%"><br><sub>Ornella Russo<br><sup>@Ella711](https://github.com/Ella711) |
